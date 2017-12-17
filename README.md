@@ -1,6 +1,7 @@
-# domino
+# Domino project
 
-> Domino project
+This is a webpack based VueJS project for experimenting with nice visualizations of sample data.
+Currently vue-chartjs is used to create charts. See https://github.com/apertureless/vue-chartjs for more info.
 
 ## Build Setup
 
