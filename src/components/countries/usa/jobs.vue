@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <p>Jobs of {{stateAbbr}}</p>
-    <p>{{jobsData}}</p>
+  <div v-if="jobsDataResult.length > 0">
+    <h3>Jobs of {{stateAbbr}}</h3>
+    <p>{{jobsDataResult[0]}}</p>
+  </div>
+  <div v-else>
+    No job data found for this state.
   </div>
 </template>
 
@@ -11,14 +14,24 @@
     name: "jobs",
     data() {
       return {
-        jobsData: undefined
+        jobsDataResult: []
       }
     },
     props: ['stateAbbr'],
     created() {
-      UsaService.getJobsData(this.stateAbbr).then(jobsData => {
-        this.jobsData = jobsData;
-      })
+      this.loadJobsData(this.stateAbbr);
+    },
+    methods: {
+      loadJobsData(stateAbbr) {
+        UsaService.getJobsData(stateAbbr).then(jobsDataResult => {
+          this.jobsDataResult = jobsDataResult;
+        })
+      }
+    },
+    watch: {
+      stateAbbr(newVal) {
+        this.loadJobsData(newVal)
+      }
     }
   }
 </script>
