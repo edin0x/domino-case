@@ -1,7 +1,7 @@
 <template>
-  <div v-if="jobsDataResult.length > 0">
+  <div v-if="chartData.length > 0">
     <h3>Jobs of {{stateAbbr}}</h3>
-    <p>{{jobsDataResult[0]}}</p>
+    <doughnut :chart-data="chartData"></doughnut>
   </div>
   <div v-else>
     No job data found for this state.
@@ -9,12 +9,16 @@
 </template>
 
 <script>
+  import Doughnut from '../../visualizations/doughnut';
   import UsaService from '../../../services/usa-service';
   export default {
+    components: {
+      Doughnut
+    },
     name: "jobs",
     data() {
       return {
-        jobsDataResult: []
+        chartData: []
       }
     },
     props: ['stateAbbr'],
@@ -23,8 +27,8 @@
     },
     methods: {
       loadJobsData(stateAbbr) {
-        UsaService.getJobsData(stateAbbr).then(jobsDataResult => {
-          this.jobsDataResult = jobsDataResult;
+        UsaService.getJobsData(stateAbbr).then(jobsData => {
+          this.chartData = jobsData.map(jd => ({ label: jd[0], value: jd[1] }));;
         })
       }
     },

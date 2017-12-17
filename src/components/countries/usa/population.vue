@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Population of {{stateAbbr}}</h3>
-    <div v-if="barChartData.length > 0">
-      <bar-chart :chart-data="barChartData"></bar-chart>
+    <div v-if="chartData.length > 0">
+      <bar-chart :chart-data="chartData"></bar-chart>
     </div>
     <div v-else>
       No population data found for this state.
@@ -20,8 +20,7 @@
     },
     data() {
       return {
-        barChartData: [],
-        populationData: {}
+        chartData: []
       }
     },
     props: ['stateAbbr'],
@@ -31,7 +30,7 @@
     methods: {
       loadPopulationData(stateAbbr) {
         UsaService.getPopulationData(stateAbbr).then(populationData => {
-         this.barChartData = populationData.map(pd => ({ label: pd[0], value: pd[1] }));
+         this.chartData = populationData.map(pd => ({ label: pd[0], value: pd[1] }));
         })
       }
     },
