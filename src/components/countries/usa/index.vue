@@ -19,12 +19,34 @@
 
     <div class="ui bottom attached segment" v-if="selectedState">
       <h2>{{ selectedState }}</h2>
+
+      <div class="ui top attached tabular menu">
+        <div
+          v-for="viewName in Object.keys(views)"
+          class="item"
+          :class="selectedTab === viewName ? 'active': ''"
+          @click="selectedTab = viewName; selectedView = views[viewName]"
+        >{{ viewName }}</div>
+      </div>
+      <div class="ui bottom attached active tab segment">
+        <component :is="selectedView" ></component>
+      </div>
+    </div>
+    <div v-else>
+      <div class="ui icon message">
+        <i class="search icon"></i>
+        <div class="content">
+          <p>Search for a state and select one to display it.</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import UsaService from '../../services/usa-service';
+import UsaPopulation from './population';
+import UsaJobs from './jobs';
+import UsaService from '../../../services/usa-service';
 
 export default {
   name: 'US',
@@ -34,7 +56,13 @@ export default {
   data() {
     return {
       searchQuery: '',
-      states: {}
+      selectedTab: "Population",
+      selectedView: UsaPopulation,
+      states: {},
+      views: {
+        'Population': UsaPopulation,
+        'Jobs': UsaJobs
+      }
     };
   },
   computed: {

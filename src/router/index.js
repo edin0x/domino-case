@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Index from '@/components/index';
-import USA from '@/components/countries/usa';
+import USA from '@/components/countries/usa/index';
 
 Vue.use(Router);
 
