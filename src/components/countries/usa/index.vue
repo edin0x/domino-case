@@ -2,6 +2,7 @@
   <div class="ui segments">
     <div class="ui top attached very padded text basic segment">
       <h1>United states visualizations</h1>
+      <p><router-link to="/">Go back to homepage</router-link></p>
       <div class="ui search">
         <div class="ui icon input">
           <input v-model="searchQuery" class="prompt" type="text" placeholder="Search countries...">
