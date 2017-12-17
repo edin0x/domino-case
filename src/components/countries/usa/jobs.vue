@@ -16,7 +16,7 @@
     },
     props: ['stateAbbr'],
     created() {
-      UsaService.getJobsData().then(jobsData => {
+      UsaService.getJobsData(this.stateAbbr).then(jobsData => {
         this.jobsData = jobsData;
       })
     }
