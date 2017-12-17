@@ -4,7 +4,17 @@ const csvParse = require('csv-parse/lib/sync');
 class CountryService {
   getJobsData(stateAbbr) {
     return fetch('/static/data/usa/jobs.json').then(response =>
-      response.json().then(jobsData => jobsData.filter(jobData => jobData.name === stateAbbr))
+      response.json().then(jobsDataResults => {
+        const jobsDataResult = jobsDataResults.filter(jobData => jobData.name === stateAbbr);
+        let jobsData = {};
+
+        if (jobsDataResult.length > 0) {
+          jobsData = jobsDataResult[0];
+          delete jobsData.name;
+        }
+
+        return Object.entries(jobsData);
+      })
     )}
 
   getPopulationData(stateAbbr) {
