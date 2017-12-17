@@ -1,15 +1,24 @@
 <template>
   <div>
-    <p>Population</p>
+    <p>Population of {{stateAbbr}}</p>
+    <p>{{populationData}}</p>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "population"
+  import UsaService from '../../../services/usa-service';
+  export default {
+    name: "jobs",
+    data() {
+      return {
+        populationData: undefined
+      }
+    },
+    props: ['stateAbbr'],
+    created() {
+      UsaService.getPopulationData().then(populationData => {
+        this.populationData = populationData;
+      })
     }
+  }
 </script>
-
-<style scoped>
-
-</style>

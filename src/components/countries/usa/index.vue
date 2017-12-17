@@ -16,7 +16,6 @@
         </div>
       </div>
     </div>
-
     <div class="ui bottom attached segment" v-if="selectedState">
       <h2>{{ selectedState }}</h2>
 
@@ -29,7 +28,7 @@
         >{{ viewName }}</div>
       </div>
       <div class="ui bottom attached active tab segment">
-        <component :is="selectedView" ></component>
+        <component :is="selectedView" :state-abbr="selectedStateAbbr"></component>
       </div>
     </div>
     <div v-else>
@@ -49,7 +48,7 @@ import UsaJobs from './jobs';
 import UsaService from '../../../services/usa-service';
 
 export default {
-  name: 'US',
+  name: 'usa',
   created() {
     this.loadStates();
   },
@@ -76,8 +75,15 @@ export default {
         .map(entry => ({ abbr: entry[0], name: entry[1] }) );
     },
     selectedState() {
+      if (this.selectedStateAbbr) {
+        return this.states[this.selectedStateAbbr];
+      }
+
+      return '';
+    },
+    selectedStateAbbr() {
       if (this.$route.params) {
-        return this.states[this.$route.params.stateAbbr] || '';
+        return this.states[this.$route.params.stateAbbr] ? this.$route.params.stateAbbr : '';
       }
 
       return '';

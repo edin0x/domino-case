@@ -1,12 +1,12 @@
 import 'whatwg-fetch';
 
 class CountryService {
-  getJobTypes() {
+  getJobsData() {
     return fetch('/static/data/usa/jobs.json').then(response => response.json())
   }
 
-  getPopulationComposition() {
-    return fetch('/static/data/usa/population.csv')
+  getPopulationData() {
+    return fetch('/static/data/usa/population.csv').then(response => response.text())
   }
 
   getStateData() {
