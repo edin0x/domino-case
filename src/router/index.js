@@ -10,5 +10,5 @@ export default new Router({
     { path: '/', name: 'index', component: Index },
     { path: '/usa', name: 'usa', component: USA },
     { path: '/usa/state/:stateAbbr', name: 'usa', component: USA }
-  ],
+  ]
 });
