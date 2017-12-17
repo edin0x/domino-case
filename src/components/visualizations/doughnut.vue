@@ -1,9 +1,9 @@
 <script>
-  import { Bar } from 'vue-chartjs';
+  import { Doughnut } from 'vue-chartjs';
 
   export default {
     extends: Bar,
-    name: "bar-chart",
+    name: "doughnut",
     props: ['chartData'],
     data() {
       return {
