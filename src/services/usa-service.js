@@ -10,15 +10,21 @@ class CountryService {
   getPopulationData(stateAbbr) {
     return fetch('/static/data/usa/population.csv').then(response =>
       response.text().then(populationCsvData => {
-        const output = csvParse(populationCsvData, { delimiter: ',', columns: true });
-        return output.filter(pd => pd.State === stateAbbr);
+        const populationDataResult = csvParse(populationCsvData, { delimiter: ',', columns: true }).filter(pd => pd.State === stateAbbr);
+        let populationData = {};
+
+        if (populationDataResult.length > 0) {
+          populationData = populationDataResult[0];
+          delete populationData.State;
+        }
+
+        return Object.entries(populationData)
       })
     )
   }
 
   getStateData() {
-    return fetch('/static/data/usa/states.json').then(response => response.json()
-    )
+    return fetch('/static/data/usa/states.json').then(response => response.json())
   }
 }
 
