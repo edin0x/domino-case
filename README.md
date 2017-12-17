@@ -25,3 +25,7 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## TODOs
+* Tests are currently broken due to some configuration issues. This needs to be fixed.
+* Add more nice charts.
