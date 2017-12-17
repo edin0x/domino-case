@@ -9,6 +9,6 @@ export default new Router({
   routes: [
     { path: '/', name: 'index', component: Index },
     { path: '/usa', name: 'usa', component: USA },
-    { path: '/usa/state/:stateAbbr', name: 'usa', component: USA }
+    { path: '/usa/state/:stateAbbr', name: 'usa-state', component: USA }
   ]
 });
