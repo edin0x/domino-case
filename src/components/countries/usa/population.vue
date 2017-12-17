@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Population of {{stateAbbr}}</h3>
-    <div v-if="populationDataFound">
-      <p>{{populationStateData}}</p>
+    <div v-if="populationDataResult.length > 0">
+      <p>{{populationDataResult[0]}}</p>
     </div>
     <div v-else>
       No population data found for this state.
@@ -16,8 +16,7 @@
     name: "jobs",
     data() {
       return {
-        populationDataFound: true,
-        populationStateData: undefined
+        populationDataResult: []
       }
     },
     props: ['stateAbbr'],
@@ -26,13 +25,8 @@
     },
     methods: {
       loadPopulationData(stateAbbr) {
-        UsaService.getPopulationData(stateAbbr).then(populationData => {
-          if (populationData.length > 0) {
-            this.populationStateData = populationData[0];
-            this.populationDataFound = true;
-          } else {
-            this.populationDataFound = false;
-          }
+        UsaService.getPopulationData(stateAbbr).then(populationDataResult => {
+          this.populationDataResult = populationDataResult;
         })
       }
     },
