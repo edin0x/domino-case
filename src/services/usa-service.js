@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 class CountryService {
   getJobTypes() {
     return fetch('/static/data/usa/jobs.json').then(response => response.json())
